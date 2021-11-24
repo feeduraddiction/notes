@@ -2,12 +2,10 @@ import React from 'react';
 import './SingleNote.css';
 
 const SingleNote = (props) => {
-  console.log(props);
   const deleteNoteHandler = (e) => {
     const id = e.target.getAttribute('id');
     const { onGetIdToDel } = props;
     onGetIdToDel(id);
-    // console.log(id);
   };
   const { note, id } = props;
   return (
