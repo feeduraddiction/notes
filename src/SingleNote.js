@@ -1,25 +1,12 @@
 import React from 'react';
-import './SingleNote.css';
+import './SingleNote.scss';
 
 const SingleNote = (props) => {
-  const deleteNoteHandler = (e) => {
-    const id = e.target.getAttribute('id');
-    const { onGetIdToDel } = props;
-    onGetIdToDel(id);
-  };
+  console.log(props);
   const { note, id } = props;
   return (
     <div className="single-note">
-      <div className="single-note__content">{note}</div>
-      <button
-        type="button"
-        className="single-note__control"
-        key={id}
-        id={id}
-        onClick={deleteNoteHandler}
-      >
-        X
-      </button>
+      <div className="single-note__content" key={id}>{note}</div>
     </div>
   );
 };

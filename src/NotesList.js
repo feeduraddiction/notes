@@ -1,25 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SingleNote from './SingleNote';
 
-const NotesList = (props) => {
-  const [noteToDel, setNoteToDel] = useState('');
-  const getIdToDelHandler = (note) => {
-    setNoteToDel(note);
-  };
-  const { noteText } = props;
-  const filteredNotes = noteText.filter((element) => element.key !== noteToDel);
-
+const NotesList = ({ notes, onDeleteNotes }) => {
+  console.log(onDeleteNotes);
   return (
     <div>
-      {filteredNotes.map((element, index) => (
-        <SingleNote
-          note={element.note}
-          key={index.id}
-          onGetIdToDel={getIdToDelHandler}
-        />
+      {notes.map((element, index) => (
+        <div className="single-note-general">
+          <SingleNote
+            note={element.note}
+            key={element.id}
+            id={element.id}
+            // onGetIdToDel={getIdToDelHandler(element.id)}
+          />
+          <button
+            type="button"
+            id={element.id}
+            className="single-note__control"
+            onClick={() => onDeleteNotes(index)}
+          >
+            X
+          </button>
+        </div>
       ))}
     </div>
   );
 };
-
 export default NotesList;

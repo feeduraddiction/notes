@@ -9,8 +9,8 @@ const InputField = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
     const note = { note: enteredNote };
-    const { onGetNoteData } = props;
-    onGetNoteData(note);
+    const { onSaveNote } = props;
+    onSaveNote(note);
     setEnteredNote('');
   };
 

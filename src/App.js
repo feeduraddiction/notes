@@ -1,23 +1,15 @@
-import React, { useState } from 'react';
-import InputField from './InputField';
+import React from 'react';
+import NewNote from './NewNote';
 import './App.css';
 import NotesList from './NotesList';
+import useNoteState from './useNoteState';
 
-const init = [
-  {
-    note: 'hello',
-    id: 0,
-  },
-];
 const App = () => {
-  const [note, setNote] = useState(init);
-  const getNoteDataHandler = (enteredNoteData) => {
-    setNote((prevNote) => [enteredNoteData, ...prevNote]);
-  };
+  const { notes, addNote, deleteNotes } = useNoteState([]);
   return (
     <div className="App">
-      <InputField onGetNoteData={getNoteDataHandler} />
-      <NotesList noteText={note} />
+      <NewNote onAddNote={addNote} />
+      <NotesList notes={notes} onDeleteNotes={deleteNotes} />
     </div>
   );
 };
