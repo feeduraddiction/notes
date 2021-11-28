@@ -1,12 +1,24 @@
 import React from 'react';
+import { EditText } from 'react-edit-text';
 import './SingleNote.scss';
 
-const SingleNote = (props) => {
-  console.log(props);
-  const { note, id } = props;
+const SingleNote = ({
+  note,
+  id,
+  index,
+  onEditNote,
+}) => {
+  const saveValueHandler = (value) => {
+    onEditNote(value.value, index);
+  };
   return (
     <div className="single-note">
-      <div className="single-note__content" key={id}>{note}</div>
+      <EditText
+        name="note"
+        defaultValue={note}
+        key={id}
+        onSave={saveValueHandler}
+      />
     </div>
   );
 };

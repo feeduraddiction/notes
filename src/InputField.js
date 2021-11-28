@@ -1,15 +1,26 @@
 import React, { useState } from 'react';
 import './InputField.css';
 
-const InputField = (props) => {
+const InputField = ({ onSaveNote }) => {
+  const findHashtags = (noteToFind) => {
+    const regExp = /\B#\w\w+\b/g;
+    const result = noteToFind.match(regExp);
+    if (result) {
+      return result;
+    }
+    return [''];
+  };
+
   const [enteredNote, setEnteredNote] = useState('');
   const noteChangeHandler = (event) => {
     setEnteredNote(event.target.value);
   };
   const submitHandler = (event) => {
     event.preventDefault();
-    const note = { note: enteredNote };
-    const { onSaveNote } = props;
+    const note = {
+      note: enteredNote,
+      hashtag: findHashtags(enteredNote),
+    };
     onSaveNote(note);
     setEnteredNote('');
   };

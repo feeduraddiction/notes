@@ -1,17 +1,22 @@
 import React from 'react';
 import SingleNote from './SingleNote';
 
-const NotesList = ({ notes, onDeleteNotes }) => {
-  console.log(onDeleteNotes);
+const NotesList = ({
+  notes,
+  onDeleteNotes,
+  onSaveEditedNote,
+// eslint-disable-next-line arrow-body-style
+}) => {
+  // console.log(notes);
   return (
     <div>
       {notes.map((element, index) => (
-        <div className="single-note-general">
+        <div className="single-note-general" key={element.id}>
           <SingleNote
             note={element.note}
-            key={element.id}
             id={element.id}
-            // onGetIdToDel={getIdToDelHandler(element.id)}
+            index={index}
+            onEditNote={onSaveEditedNote}
           />
           <button
             type="button"
