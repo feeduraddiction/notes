@@ -11,6 +11,8 @@ const App = () => {
     addNote,
     deleteNotes,
     saveEditedNote,
+    filterNotes,
+    restoreHashtags,
   } = useNoteState([]);
   console.log(notes);
   return (
@@ -20,6 +22,8 @@ const App = () => {
       />
       <HashTagsList
         notes={notes}
+        onFilterNotes={filterNotes}
+        onRestoreHashtags={restoreHashtags}
       />
       <NotesList
         notes={notes}

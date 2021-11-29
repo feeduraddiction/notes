@@ -7,7 +7,6 @@ const NotesList = ({
   onSaveEditedNote,
 // eslint-disable-next-line arrow-body-style
 }) => {
-  // console.log(notes);
   return (
     <div>
       {notes.map((element, index) => (

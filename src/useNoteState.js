@@ -30,5 +30,12 @@ export default (initialValue) => {
       };
       setNotes(newNotes);
     },
+    filterNotes: (filterHashtag) => {
+      const newNotes = notes.filter((note) => Object.values(note)[0].includes(filterHashtag));
+      setNotes(newNotes);
+    },
+    restoreHashtags: () => {
+      setNotes(notes);
+    },
   };
 };

@@ -1,16 +1,17 @@
 import React from 'react';
 
 // eslint-disable-next-line arrow-body-style
-const HashTagsList = ({ notes }) => {
-//   console.log(notes, 'hell');
+const HashTagsList = ({ notes, onFilterNotes, onRestoreHashtags }) => {
+  const arrayOfNotes = Array.from(new Set(notes.map((note) => Object.values(note)[1]).flat(1)));
+  const selectHashTag = (event) => {
+    onFilterNotes(event.target.textContent);
+  };
+
   return (
     <div>
       <h2>List of hashtags</h2>
-      {notes.map((element) => (
-        element.hashtag.map((hashtag) => (
-          <div>{hashtag}</div>
-        ))
-      ))}
+      <button type="button" onClick={onRestoreHashtags}>Restore hashtags</button>
+      {arrayOfNotes.map((element) => <button key={notes.id} type="button" onClick={selectHashTag}>{element}</button>)}
     </div>
   );
 };
