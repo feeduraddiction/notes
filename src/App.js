@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import NewNote from './NewNote';
 import './App.css';
 import NotesList from './NotesList';
@@ -14,6 +14,21 @@ const App = () => {
     filterNotes,
     restoreHashtags,
   } = useNoteState([]);
+  useEffect(() => {
+    const url = 'http://localhost:3001/users';
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url, { mode: 'no-cors' });
+        console.log(response);
+        const json = await response.json();
+        console.log(json);
+      } catch (error) {
+        console.log('error', error);
+      }
+    };
+    fetchData();
+  }, []);
+
   console.log(notes);
   return (
     <div className="App">
