@@ -8,6 +8,17 @@ const NewNote = ({ onAddNote }) => {
       id: Math.random().toString(),
     };
     onAddNote(noteText);
+    fetch('http://localhost:3001/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(noteText),
+    })
+      .then((response) => {
+        if (!response.ok) throw Error(response.statusText);
+        return response.json();
+      })
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
     // console.log(noteData);
   };
   return (

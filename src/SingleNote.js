@@ -5,13 +5,13 @@ import './SingleNote.scss';
 const SingleNote = ({
   note,
   id,
-  index,
-  onEditNote,
+  // index,
+  // onEditNote,
 }) => {
   const saveValueHandler = (value) => {
     console.log(value);
-    onEditNote(value.value, index);
-    console.log(note);
+    // onEditNote(value.value, index);
+    // console.log(note);
   };
 
   return (

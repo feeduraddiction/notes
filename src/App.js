@@ -9,7 +9,7 @@ const App = () => {
   const {
     notes,
     addNote,
-    deleteNotes,
+    // deleteNotes,
     saveEditedNote,
     filterNotes,
     restoreHashtags,
@@ -21,9 +21,7 @@ const App = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(url);
-        console.log(response);
         const json = await response.json();
-        console.log(json);
         setTest(json);
       } catch (error) {
         console.log('error', error);
@@ -35,18 +33,22 @@ const App = () => {
     event.preventDefault();
     fetch('http://localhost:3001/users', {
       method: 'POST',
-      headers: {
-        Accept: 'testjson',
-        'Content-Type': 'testContent',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         name: 'santa',
+        password: 'pass',
+        profession: 'king',
+        id: '1234',
       }),
     })
-      .then((res) => res.json())
+      .then((response) => {
+        if (!response.ok) throw Error(response.statusText);
+        return response.json();
+      })
       .then((data) => console.log(data))
       .catch((err) => console.log(err));
   };
+
   console.log(notes);
   console.log(Object.values(test));
   return (
@@ -55,17 +57,17 @@ const App = () => {
         onAddNote={addNote}
       />
       <HashTagsList
-        notes={notes}
+        notes={Object.values(test)}
         onFilterNotes={filterNotes}
         onRestoreHashtags={restoreHashtags}
       />
       <NotesList
-        notes={notes}
-        onDeleteNotes={deleteNotes}
+        notes={Object.values(test)}
+    //  onDeleteNotes={testDeleteNotes}
         onSaveEditedNote={saveEditedNote}
       />
       <div>
-        {Object.values(test).map((element) => <div>{element.name}</div>)}
+        {Object.values(test).map((element) => <div>{element.note}</div>)}
         <button type="button" onClick={sendToServerHandle}>Send to server!!1</button>
       </div>
     </div>
