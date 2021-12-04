@@ -5,21 +5,17 @@ import './SingleNote.scss';
 const SingleNote = ({
   note,
   id,
-  // index,
-  // onEditNote,
+  onSaveChanges,
 }) => {
   const saveValueHandler = (value) => {
-    console.log(value);
-    // onEditNote(value.value, index);
-    // console.log(note);
+    onSaveChanges(value.value, id);
   };
 
   return (
-    <div className="single-note">
+    <div className="single-note" key={id}>
       <EditText
         name="note"
         defaultValue={note}
-        key={id}
         onSave={saveValueHandler}
       />
     </div>

@@ -4,15 +4,14 @@ import SingleNote from './SingleNote';
 const NotesList = ({
   notes,
   onSaveEditedNote,
+  onDeleteNote,
 // eslint-disable-next-line arrow-body-style
 }) => {
-  const testDeleteNotes = (note) => {
-    console.log(note);
-    fetch('http://localhost:3001/users', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(note),
-    });
+  const deleteNoteHandler = (note) => {
+    onDeleteNote(note);
+  };
+  const getDataToChange = (changedNote, number) => {
+    onSaveEditedNote(changedNote, number);
   };
 
   return (
@@ -24,12 +23,13 @@ const NotesList = ({
             id={element.id}
             index={index}
             onEditNote={onSaveEditedNote}
+            onSaveChanges={getDataToChange}
           />
           <button
             type="button"
             id={element.id}
             className="single-note__control"
-            onClick={() => testDeleteNotes(element)}
+            onClick={() => deleteNoteHandler(element)}
           >
             X
           </button>

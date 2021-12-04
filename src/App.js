@@ -2,74 +2,92 @@ import React, { useEffect, useState } from 'react';
 import NewNote from './NewNote';
 import './App.css';
 import NotesList from './NotesList';
-import useNoteState from './useNoteState';
 import HashTagsList from './HashTagsList';
+import fetchData from './FetchData';
 
 const App = () => {
-  const {
-    notes,
-    addNote,
-    // deleteNotes,
-    saveEditedNote,
-    filterNotes,
-    restoreHashtags,
-  } = useNoteState([]);
-
-  const [test, setTest] = useState('');
+  const [notes, setNotes] = useState([]);
   useEffect(() => {
-    const url = 'http://localhost:3001/users';
-    const fetchData = async () => {
-      try {
-        const response = await fetch(url);
-        const json = await response.json();
-        setTest(json);
-      } catch (error) {
-        console.log('error', error);
-      }
-    };
-    fetchData();
+    fetchData(setNotes);
   }, []);
-  const sendToServerHandle = (event) => {
-    event.preventDefault();
-    fetch('http://localhost:3001/users', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: 'santa',
-        password: 'pass',
-        profession: 'king',
-        id: '1234',
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) throw Error(response.statusText);
-        return response.json();
-      })
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+
+  const filteredHashtagsHandler = (props) => {
+    const filteredNotes = Object.values(notes).filter((singleNote) => singleNote.note
+      .includes(props));
+    setNotes(filteredNotes);
   };
 
-  console.log(notes);
-  console.log(Object.values(test));
+  const restoreHashtahsHandler = () => {
+    fetchData(setNotes);
+  };
+
+  const addNote = (newNote) => {
+    fetch('http://localhost:3001/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // eslint-disable-next-line quote-props
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(newNote),
+    })
+      .then((request) => request.json()
+        .then((json) => setNotes(json)));
+  };
+
+  const deleteNoteHandler = (noteToDelete) => {
+    fetch(`http://localhost:3001/users/${noteToDelete.id}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((request) => request.json()
+        .then((json) => setNotes(json)));
+  };
+
+  const findHashtags = (noteToFind) => {
+    const regExp = /\B#\w\w+\b/g;
+    const result = noteToFind.match(regExp);
+    if (result) {
+      return result;
+    }
+    return [''];
+  };
+
+  const saveEditedNoteHandler = (editedNote, id) => {
+    console.log(editedNote, id);
+    fetch(`http://localhost:3001/users/${id}`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        note: editedNote,
+        hashtag: findHashtags(editedNote),
+      }),
+    })
+      .then((request) => request.json()
+        .then((json) => setNotes(json)));
+  };
+
   return (
     <div className="App">
       <NewNote
         onAddNote={addNote}
       />
       <HashTagsList
-        notes={Object.values(test)}
-        onFilterNotes={filterNotes}
-        onRestoreHashtags={restoreHashtags}
+        notes={Object.values(notes)}
+        onHashtagFilter={filteredHashtagsHandler}
+        onRestoreHashtags={restoreHashtahsHandler}
       />
       <NotesList
-        notes={Object.values(test)}
-    //  onDeleteNotes={testDeleteNotes}
-        onSaveEditedNote={saveEditedNote}
+        notes={Object.values(notes)}
+        onDeleteNote={deleteNoteHandler}
+        onSaveEditedNote={saveEditedNoteHandler}
       />
-      <div>
-        {Object.values(test).map((element) => <div>{element.note}</div>)}
-        <button type="button" onClick={sendToServerHandle}>Send to server!!1</button>
-      </div>
     </div>
   );
 };
