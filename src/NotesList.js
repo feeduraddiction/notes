@@ -1,5 +1,6 @@
 import React from 'react';
 import SingleNote from './SingleNote';
+import './NotesList.scss';
 
 const NotesList = ({
   notes,
@@ -15,7 +16,7 @@ const NotesList = ({
   };
 
   return (
-    <div>
+    <div className="notes-list">
       {notes.map((element, index) => (
         <div className="single-note-general" key={element.id}>
           <SingleNote
@@ -28,10 +29,10 @@ const NotesList = ({
           <button
             type="button"
             id={element.id}
-            className="single-note__control"
+            className="single-note__delete"
             onClick={() => deleteNoteHandler(element)}
           >
-            X
+            🗑️
           </button>
         </div>
       ))}

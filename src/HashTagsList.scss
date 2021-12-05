@@ -1,0 +1,21 @@
+.hashtag-list__button{
+    border: 1px solid rgba(255, 105, 180, 0.205);
+    background-color: transparent;
+    font-size: 22px;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 8px 15px;
+    color: #b1b1b1;
+}
+
+.hashtag-list__button:hover
+{
+    // background-color: #e1e1e1;
+    color: black;
+    border: 1px solid hotpink;
+}
+
+.active-button{
+    color: black;
+    border: 1px solid hotpink;
+}

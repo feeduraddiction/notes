@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import NewNote from './NewNote';
-import './App.css';
+import './App.scss';
 import NotesList from './NotesList';
 import HashTagsList from './HashTagsList';
 import fetchData from './FetchData';
@@ -57,7 +57,6 @@ const App = () => {
   };
 
   const saveEditedNoteHandler = (editedNote, id) => {
-    console.log(editedNote, id);
     fetch(`http://localhost:3001/users/${id}`, {
       method: 'PUT',
       headers: {
