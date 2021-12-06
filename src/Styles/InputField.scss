@@ -1,0 +1,29 @@
+@import "borderStyle";
+
+.input-field{
+    margin: 100px 0px;
+
+    input {
+        width: 50%;
+        border: none;
+        border-bottom: 2px solid $maincolor;
+    }
+    
+    input:focus {
+        outline: none;
+    }
+
+    input[type="text"] {
+        font-size: 28px;
+    }
+
+    ::placeholder{
+        color: $unactive-text;
+        font-size: 28px;
+    }
+
+    h1{
+        font-size: 48px;
+        font-weight: 300;
+    }
+}

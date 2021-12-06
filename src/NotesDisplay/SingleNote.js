@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
-import './SingleNote.scss';
+import '../Styles/SingleNote.scss';
 import Mark from 'mark.js';
 
 const SingleNote = ({

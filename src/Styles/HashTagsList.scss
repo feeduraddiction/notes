@@ -1,0 +1,20 @@
+@import "borderStyle";
+
+.hashtag-list__button{
+    border: 1px solid rgba(255, 105, 180, 0.205);
+    background-color: transparent;
+    font-size: 22px;
+    border-radius: $border-radius;
+    margin: 5px;
+    padding: 8px 15px;
+    color: $unactive-text;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.hashtag-list__button:hover,
+.active-button
+{
+    color: black;
+    border: $border-box;
+}

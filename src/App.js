@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import NewNote from './NewNote';
-import './App.scss';
-import NotesList from './NotesList';
-import HashTagsList from './HashTagsList';
-import fetchData from './FetchData';
+import NewNote from './NotesInput/NewNote';
+import './Styles/App.scss';
+import NotesList from './NotesDisplay/NotesList';
+import HashTagsList from './NotesDisplay/HashTagsList';
+import fetchData from './Functions/FetchData';
 
 const App = () => {
   const [notes, setNotes] = useState([]);
@@ -72,13 +72,15 @@ const App = () => {
         .then((json) => setNotes(json)));
   };
 
+  const arrayOfHashtags = Array.from(new Set(Object.values(notes).map((note) => Object.values(note)[1]).flat(1))).filter((element) => element !== '');
+
   return (
     <div className="App">
       <NewNote
         onAddNote={addNote}
       />
       <HashTagsList
-        notes={Object.values(notes)}
+        notes={arrayOfHashtags}
         onHashtagFilter={filteredHashtagsHandler}
         onRestoreHashtags={restoreHashtahsHandler}
       />

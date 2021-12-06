@@ -1,0 +1,23 @@
+@import "borderStyle";
+
+.single-note-general {
+    border: $border-box;
+    border-radius: $border-radius;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 5px 0;
+}
+
+.single-note__delete{
+    border: none;
+    background-color: transparent;
+    opacity: 0;
+    transition: 0.2s ease;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.single-note-general:hover .single-note__delete{
+    opacity: 1;
+}

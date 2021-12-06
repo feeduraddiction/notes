@@ -1,25 +1,15 @@
-
-$red: red;
-@font-face {
-    font-family: "Roboto";
-    src: url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
-}
-
 .single-note {
     text-align: start;
     width: 400px !important;
 }
 
-mark{
-    background-color: transparent;
-    color: blue;
-}
 .notes-list{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
+
 
 .single-note__text{
     font-size: 18px;
@@ -30,10 +20,14 @@ mark{
 }
 
 .single-note__text:focus{
-    // outline: none;
     height: 100%;
     overflow-y: visible;
     font-style: italic;
+}
+
+mark{
+    background-color: transparent;
+    color: blue;
 }
 
 

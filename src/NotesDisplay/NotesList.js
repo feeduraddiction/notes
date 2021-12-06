@@ -1,6 +1,6 @@
 import React from 'react';
 import SingleNote from './SingleNote';
-import './NotesList.scss';
+import '../Styles/NotesList.scss';
 
 const NotesList = ({
   notes,
