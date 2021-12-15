@@ -1,6 +1,6 @@
 export default async (setHandler) => {
   try {
-    const response = await fetch('http://localhost:3001/users');
+    const response = await fetch('https://salty-fjord-44367.herokuapp.com/notes');
     const json = await response.json();
     setHandler(json);
   } catch (error) {

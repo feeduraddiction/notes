@@ -22,7 +22,7 @@ const App = () => {
   };
 
   const addNote = (newNote) => {
-    fetch('http://localhost:3001/users', {
+    fetch('https://salty-fjord-44367.herokuapp.com/notes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const App = () => {
   };
 
   const deleteNoteHandler = (noteToDelete) => {
-    fetch(`http://localhost:3001/users/${noteToDelete.id}`, {
+    fetch(`https://salty-fjord-44367.herokuapp.com/notes/${noteToDelete.id}`, {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
@@ -57,7 +57,7 @@ const App = () => {
   };
 
   const saveEditedNoteHandler = (editedNote, id) => {
-    fetch(`http://localhost:3001/users/${id}`, {
+    fetch(`https://salty-fjord-44367.herokuapp.com/notes/${id}`, {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
